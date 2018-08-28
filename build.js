@@ -14,6 +14,7 @@
 const fs = require('fs');
 const path = require('path');
 const twemoji = require('twemoji/2/twemoji.npm');
+const appRoot = require('app-root-path');
 const getConfig = require('./src/config');
 
 const outputPath = path.resolve(__dirname, 'generated/emojis.json');
@@ -28,7 +29,7 @@ module.exports = async () => {
     let shortnames = config && config.shortnames;
 
     const twemojiFileNames = fs
-        .readdirSync(process.cwd(), path.resolve('node_modules/twemoji/2/svg'))
+        .readdirSync(appRoot + '/node_modules/twemoji/2/svg')
         .map(name => path.basename(name, '.svg'));
 
     const emojis = {};

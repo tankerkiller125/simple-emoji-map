@@ -12,6 +12,7 @@
         "lint": "prettier --single-quote --trailing-comma es5 --print-width 80 --tab-width 4 --write bin/* *.js *.mjs *.md"
     },
     "dependencies": {
+        "app-root-path": "^2.1.0",
         "cosmiconfig": "^5.0.6",
         "emojibase-data": "^3.1.0",
         "twemoji": "^11.0.1"
