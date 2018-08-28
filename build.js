@@ -28,7 +28,7 @@ module.exports = async () => {
     let shortnames = config && config.shortnames;
 
     const twemojiFileNames = fs
-        .readdirSync(path.resolve('node_modules/twemoji/2/svg'))
+        .readdirSync(process.cwd(), path.resolve('node_modules/twemoji/2/svg'))
         .map(name => path.basename(name, '.svg'));
 
     const emojis = {};
