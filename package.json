@@ -1,0 +1,22 @@
+{
+    "name": "simple-emoji-map",
+    "version": "0.1.0",
+    "description": "A simple emoji map that can be built at any time",
+    "main": "index.js",
+    "module": "index.mjs",
+    "jsnext:main": "index.mjs",
+    "author": "David Sevilla Martín",
+    "license": "MIT",
+    "scripts": {
+        "install": "node bin/build",
+        "lint": "prettier --single-quote --trailing-comma es5 --print-width 80 --tab-width 4 --write bin/* *.js *.mjs *.md"
+    },
+    "dependencies": {
+        "cosmiconfig": "^5.0.6",
+        "emojibase-data": "^3.1.0",
+        "twemoji": "^11.0.1"
+    },
+    "devDependencies": {
+        "prettier": "^1.14.2"
+    }
+}
