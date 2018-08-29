@@ -7,5 +7,12 @@ const explorer = cosmiconfig(name, {
       ".simple-emoji-map.json",
     ],
 });
+const def = {
+  shortnames: {},
+  type: 'emoji',
+  regex: null,
+}
+const defaults = (obj, defs) => Object.assign({}, obj, defs, obj);
 
-module.exports = () => explorer.search().then(e => e && e.config);
+
+module.exports = () => explorer.search().then(e => defaults(e && e.config, def));

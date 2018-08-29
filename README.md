@@ -29,11 +29,21 @@ const build = require('simple-emoji-map/build');
 build();
 ```
 
-#### Custom Shortnames
+### Config
 
 To customize the build process, you will need either a `.simple-emoji-map` file or a `simple-emoji-map` property in package.json.
 
-This is the best way to add custom shortnames to the map file.
+```js
+{
+  "shortnames": {},
+  "type": "emoji", // or 'codepoint',
+  "regex": null // regex for whitelist
+}
+```
+
+#### Shortnames
+
+This is also the way to add custom shortnames to the map file.
 
 For example, if you want `car` to show the emoji for `red_car` (`1f697`), the file or property would look something like this:
 
@@ -41,7 +51,7 @@ For example, if you want `car` to show the emoji for `red_car` (`1f697`), the fi
 {
     "shortnames": {
         "1f697": ["car"]
-    }
+    },
 }
 ```
 
