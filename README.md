@@ -4,7 +4,7 @@ A simple emoji map package that builds its data whenever it's installed.
 
 This package maps the emoji codes (`2049`) and sets them equal to its shortnames (`["interrobang","exclamation_question"]`).
 
-### Usage
+## Usage
 
 ```js
 const emojis = require('simple-emoji-map');
@@ -16,7 +16,7 @@ Or using ES6 imports:
 import emojis from 'simple-emoji-map';
 ```
 
-### Rebuilding
+## Rebuilding
 
 The JSON file is automatically generated on install.
 
@@ -29,7 +29,7 @@ const build = require('simple-emoji-map/build');
 build();
 ```
 
-### Config
+## Config
 
 To customize the build process, you will need either a `.simple-emoji-map` file or a `simple-emoji-map` property in package.json.
 
@@ -41,7 +41,7 @@ To customize the build process, you will need either a `.simple-emoji-map` file 
 }
 ```
 
-#### Shortnames
+### Shortnames
 
 This is also the way to add custom shortnames to the map file.
 
@@ -49,9 +49,9 @@ For example, if you want `car` to show the emoji for `red_car` (`1f697`), the fi
 
 ```json
 {
-    "shortnames": {
-        "1f697": ["car"]
-    },
+  "shortnames": {
+    "1f697": ["car"]
+  }
 }
 ```
 

@@ -12,13 +12,12 @@
     "lint": "prettier --single-quote --trailing-comma es5 --print-width 80 --tab-width 4 --write bin/* *.js *.mjs *.md"
   },
   "dependencies": {
-    "app-root-path": "^2.1.0",
-    "cosmiconfig": "^5.0.6",
-    "emojibase-data": "^3.1.0",
-    "twemoji": "^11.0.1"
+    "cosmiconfig": "^5.2.1",
+    "emojibase-data": "^4.0.0",
+    "twemoji": "^12.1.2"
   },
   "devDependencies": {
-    "prettier": "^1.14.2"
+    "prettier": "^1.18.2"
   },
   "bin": {
     "simple-emoji-map": "build.js"

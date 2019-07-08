@@ -13,12 +13,11 @@
 
 const fs = require('fs');
 const path = require('path');
-const twemoji = require('twemoji/2/twemoji.npm');
-const appRoot = require('app-root-path');
+const twemoji = require('twemoji');
 const getConfig = require('./src/config');
 
 const outputPath = path.resolve(__dirname, 'generated/emojis.json');
-const data = require('emojibase-data/en/data.json');
+const data = require('emojibase-data/en/compact.json');
 
 const alternative = {
     '👁️‍🗨️': '👁‍🗨',
@@ -31,18 +30,14 @@ const TYPES = {
 module.exports = async () => {
     const config = await getConfig();
     const type = TYPES[config.type.toUpperCase()] || TYPES.EMOJI;
-    let shortnames = config.shortnames;
-
-    const twemojiFileNames = fs
-        .readdirSync(appRoot + '/node_modules/twemoji/2/svg')
-        .map(name => path.basename(name, '.svg'));
+    const shortnames = config.shortnames;
 
     const emojis = {};
     const used = [];
     const ignored = [];
 
     for (let e of data) {
-        const emoji = alternative[e.emoji] || e.emoji;
+        const emoji = alternative[e.unicode] || e.unicode;
         const emojiCode = getEmojiIconCode(emoji);
 
         if (
@@ -51,11 +46,6 @@ module.exports = async () => {
                 e.shortcodes.length
         ) {
             ignored.push(emoji);
-            continue;
-        }
-
-        if (!checkExistanceInTwemoji(emojiCode)) {
-            console.error('Can not find', emoji, emojiCode);
             continue;
         }
 
@@ -74,10 +64,6 @@ module.exports = async () => {
     fs.writeFileSync(outputPath, JSON.stringify(emojis));
 
     return { ignored, used };
-
-    function checkExistanceInTwemoji(code) {
-        return twemojiFileNames.includes(code);
-    }
 
     function getEmojiIconCode(emoji) {
         const U200D = String.fromCharCode(0x200d);
