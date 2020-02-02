@@ -17,7 +17,7 @@ const twemoji = require('twemoji');
 const getConfig = require('./src/config');
 
 const outputPath = path.resolve(__dirname, 'generated/emojis.json');
-const data = require('emojibase-data/en/compact.json');
+const data = require('emojibase-data/en/data.json');
 
 const alternative = {
     '👁️‍🗨️': '👁‍🗨',
@@ -37,7 +37,7 @@ module.exports = async () => {
     const ignored = [];
 
     for (let e of data) {
-        const emoji = alternative[e.unicode] || e.unicode;
+        const emoji = alternative[e.emoji] || e.emoji;
         const emojiCode = getEmojiIconCode(emoji);
 
         if (
@@ -47,6 +47,16 @@ module.exports = async () => {
         ) {
             ignored.push(emoji);
             continue;
+        }
+
+        if (e.skins) {
+            for (let skin of e.skins) {
+                const emoji = skin.emoji;
+                const emojiCode = getEmojiIconCode(emoji);
+                const key = type === TYPES.EMOJI ? emoji : emojiCode;
+                emojis[key] = skin.shortcodes.concat(shortnames[emojiCode] || []);
+                used.push(emoji);
+            }
         }
 
         const key = type === TYPES.EMOJI ? emoji : emojiCode;
@@ -61,6 +71,7 @@ module.exports = async () => {
         fs.mkdirSync(outputDir);
     }
 
+    fs.unlinkSync(outputPath);
     fs.writeFileSync(outputPath, JSON.stringify(emojis));
 
     return { ignored, used };
